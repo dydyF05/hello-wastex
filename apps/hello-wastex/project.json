@@ -1,0 +1,8 @@
+{
+  "name": "hello-wastex",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/hello-wastex/src",
+  "// targets": "to see all targets run: nx show project hello-wastex --web",
+  "targets": {}
+}
