@@ -8,7 +8,7 @@ defineProps<{
   <div class="wrapper">
     <div class="container">
       <div id="welcome">
-        <h1>
+        <h1 class="text-red-900">
           <span> Hello there, </span>
           Welcome {{ title }} 👋
         </h1>
