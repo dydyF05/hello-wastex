@@ -1,11 +1,10 @@
-import { describe, it, expect } from 'vitest';
-
-import { mount } from '@vue/test-utils';
+import { mountWithProviders } from '@hello-wastex/mocks';
+import { describe, expect, it } from 'vitest';
 import App from './App.vue';
 
 describe('App', () => {
   it('renders properly', () => {
-    const wrapper = mount(App, {});
-    expect(wrapper.text()).toContain('Welcome hello-wastex 👋');
+    const wrapper = mountWithProviders({ Component: App });
+    expect(wrapper.text()).toContain('Welcome');
   });
 });

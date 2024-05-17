@@ -17,7 +17,12 @@
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@hello-wastex/search-data-access": [
+        "libs/search/data-access/src/index.ts"
+      ],
+      "@hello-wastex/mocks": ["mocks/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
