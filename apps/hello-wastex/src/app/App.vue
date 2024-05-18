@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { useSearchStore } from '@hello-wastex/search-data-access';
-import NxWelcome from './NxWelcome.vue';
-const search = useSearchStore();
+import { Header } from '@hello-wastex/ui';
+const onSearch = () => {
+  console.log('App.vue');
+};
 </script>
 
 <template>
-  <NxWelcome :title="search.query" />
+  <Header v-bind:on-search="onSearch"></Header>
 </template>
