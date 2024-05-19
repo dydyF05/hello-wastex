@@ -1,12 +1,35 @@
 <script setup lang="ts">
-import { faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { debouncedWatch } from '@vueuse/core';
 import { ref } from 'vue';
-defineProps<{ onSearch?: (value: string) => void }>();
+
+// @TODO MOVE INPUT AND MODAL INTO search/ui
+
+const props = defineProps<{
+  /**
+   * Called after approriate debounce when user has changed the search input
+   * @param value search string value
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onSearch?: (value: string) => void;
+  /**
+   * The search value you want to init the search with (first init only)
+   */
+  search?: string;
+}>();
 
 const isSearchDisplayed = ref(false);
 const searchInputRef = ref<HTMLInputElement | null>(null);
-const search = ref('');
+const tmpSearch = ref(props.search || '');
+
+debouncedWatch(
+  tmpSearch,
+  async (newSearch) => {
+    props.onSearch !== undefined && props.onSearch(newSearch);
+  },
+  { debounce: 500 }
+);
 
 const toggleSearchDisplay = (): void => {
   isSearchDisplayed.value = !isSearchDisplayed.value;
@@ -32,31 +55,26 @@ const toggleSearchDisplay = (): void => {
           :icon="faSearch"
           @click="toggleSearchDisplay"
           v-if="!isSearchDisplayed"
-          class="text-blue-600 cursor-pointer hover:text-blue-800 transition ease-in-out delay-150 hover:scale-125 duration-300"
+          class="text-blue-600 cursor-pointer hover:text-blue-800 transition ease-in-out delay-150 hover:scale-110 duration-100"
         />
       </div>
     </nav>
     <div
       v-show="isSearchDisplayed"
       id="searchmodal"
-      class="fixed h-screen w-screen top-0 bottom-0 flex flex-col p-8"
+      class="fixed h-screen w-screen top-0 bottom-0 flex flex-1 justify-center flex-col p-8"
+      v-on:keyup.escape="toggleSearchDisplay"
+      @click="toggleSearchDisplay"
     >
-      <div class="w-full flex flex-wrap justify-end">
-        <FontAwesomeIcon
-          :icon="faClose"
-          @click="toggleSearchDisplay"
-          class="text-white text-xl cursor-pointer transition ease-in-out hover:scale-125 duration-300"
-        />
-      </div>
-      <div class="flex flex-1 justify-center">
-        <input
-          ref="searchInputRef"
-          v-model="search"
-          class="m-auto bg-transparent appearance-none focus:outline-none text-lg text-white placeholder:italic placeholder:text-grey-900 font-sans placeholder:font-sans"
-          placeholder="What you're looking for ?"
-          type="text"
-        />
-      </div>
+      <input
+        ref="searchInputRef"
+        v-model="tmpSearch"
+        class="m-auto bg-transparent appearance-none focus:outline-none text-lg text-white placeholder:italic placeholder:text-grey-900 font-sans placeholder:font-sans"
+        placeholder="What you're looking for ?"
+        type="text"
+        v-on:keyup.enter="toggleSearchDisplay"
+        @click.stop=""
+      />
     </div>
   </header>
 </template>
@@ -71,7 +89,7 @@ const toggleSearchDisplay = (): void => {
   }
 }
 #searchmodal {
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(00, 0, 0, 0.8);
   animation: fadein 0.2s;
 }
 </style>

@@ -18,11 +18,13 @@
     "noImplicitReturns": true,
     "baseUrl": ".",
     "paths": {
-      "@hello-wastex/ui": ["libs/hello-wastex/ui/src/index.ts"],
+      "@hello-wastex/feature": ["libs/hello-wastex/feature/src/index.ts"],
+      "@hello-wastex/utils": ["libs/hello-wastex/utils/src/index.ts"],
       "@hello-wastex/mocks": ["mocks/index.ts"],
       "@hello-wastex/search-data-access": [
         "libs/search/data-access/src/index.ts"
-      ]
+      ],
+      "@hello-wastex/ui": ["libs/hello-wastex/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

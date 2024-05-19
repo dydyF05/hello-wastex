@@ -1,0 +1,9 @@
+{
+  "name": "hello-wastex-feature",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/hello-wastex/feature/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project hello-wastex-feature --web",
+  "targets": {}
+}
