@@ -55,7 +55,10 @@ const props = defineProps<{
       No website to visit
     </button>
   </div>
-  <div v-else-if="props.isLoading" class="max-w-sm animate-pulse">
+  <div
+    v-else-if="props.isLoading"
+    class="flex flex-col flex-1 w-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 rounded-lg animate-pulse"
+  >
     <!-- Title on two large lines -->
     <div class="h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-1"></div>
     <div class="h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-56 mb-4"></div>

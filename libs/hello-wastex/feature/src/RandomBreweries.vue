@@ -6,9 +6,11 @@ import { mapApiBreweryToUI } from './utils';
 
 const COUNT = 25;
 
-const { data, isFetching } = useFetch<ApiBrewery[]>(
-  breweryApi.randoms({ size: COUNT })
-);
+const { data, isFetching } = useFetch<ApiBrewery[]>({
+  url: breweryApi.randoms({ size: COUNT }),
+  // Leave time for user to see sumth is loading
+  delay: 1500,
+});
 
 const EMPTY: never[] = [];
 const items = ref<ReturnType<typeof mapApiBreweryToUI>[]>(EMPTY);
