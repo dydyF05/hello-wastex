@@ -21,10 +21,9 @@ const scrollContainer = ref<HTMLDivElement | null>(null);
 
 const handleScroll = () => {
   if (!scrollContainer.value || !props.onReachEnd) return;
-  if (
-    scrollContainer.value.getBoundingClientRect().bottom < window.innerHeight
-  ) {
-    props.onReachEnd(window.scrollY);
+  const trigger = scrollContainer.value.getBoundingClientRect().bottom * 0.75;
+  if (trigger < window.innerHeight) {
+    props.onReachEnd(trigger);
   }
 };
 

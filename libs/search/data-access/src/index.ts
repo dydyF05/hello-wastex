@@ -13,6 +13,8 @@ type FetchParams = {
   onSuccess?: () => void;
 };
 
+let delayFetchTimeoutId: ReturnType<typeof setTimeout>;
+
 const fetchData = async ({
   data,
   error,
@@ -24,6 +26,9 @@ const fetchData = async ({
   !isFetchingMore && (data.value = null);
   error.value = null;
   isFetching.value = true;
+
+  clearTimeout(delayFetchTimeoutId);
+  await new Promise((r) => setTimeout(r, 1000));
 
   try {
     const res = await fetch(toValue(url));
@@ -54,6 +59,7 @@ export const useSearchStore = defineStore('search', () => {
     isFetching.value = false;
     isFetchingMore.value = page.value !== 1;
     !isFetchingMore.value && (data.value = []);
+
     await fetchData({
       data,
       error,

@@ -41,10 +41,9 @@ let reachEndDebounceId: ReturnType<typeof setTimeout>;
 const handleReachEnd = (scrollAmount: number) => {
   clearTimeout(reachEndDebounceId);
   isFetchingMoreDebouncing.value = true;
+  window.scrollTo(0, scrollAmount - 10);
   reachEndDebounceId = setTimeout(() => {
-    useSearchStore()
-      .nextPage()
-      .then(() => window.scrollTo(0, scrollAmount));
+    useSearchStore().nextPage();
     isFetchingMoreDebouncing.value = false;
   }, 500);
 };
