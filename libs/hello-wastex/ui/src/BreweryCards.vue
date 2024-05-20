@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { faSadTear } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import BreweryCard from './BreweryCard.vue';
 import { UIBreweryItem } from './types';
 
@@ -30,6 +32,15 @@ const props = defineProps<{
         <BreweryCard :isLoading="props.isLoading"></BreweryCard>
       </div>
     </template>
+    <template v-else-if="!props.isLoading && !props.items?.length">
+      <div
+        class="flex-1 flex flex-col justify-center items-center transition ease-in-out duration-100 m-"
+        id="emptybreweries"
+      >
+        <FontAwesomeIcon :icon="faSadTear" class="text-blue-600 text-5xl" />
+        <p class="text-blue-600 mt-4 font-sans">Drink water mate</p>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -42,7 +53,12 @@ const props = defineProps<{
     opacity: 1;
   }
 }
-#brewerycontainer {
+#brewerycontainer,
+#emptybreweries {
   animation: fadein 0.2s;
+}
+
+#emptybreweries {
+  height: 80vh;
 }
 </style>

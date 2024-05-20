@@ -50,7 +50,7 @@ const toggleSearchDisplay = (): void => {
           Brewery Sempa
         </h1>
       </div>
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+      <div class="flex flex-1 justify-end">
         <FontAwesomeIcon
           :icon="faSearch"
           @click="toggleSearchDisplay"
@@ -62,7 +62,7 @@ const toggleSearchDisplay = (): void => {
     <div
       v-show="isSearchDisplayed"
       id="searchmodal"
-      class="fixed h-screen w-screen top-0 bottom-0 flex flex-1 justify-center flex-col p-8"
+      class="fixed h-screen w-screen top-0 bottom-0 flex flex-1 justify-center flex-col p-8 z-50"
       v-on:keyup.escape="toggleSearchDisplay"
       @click="toggleSearchDisplay"
     >
