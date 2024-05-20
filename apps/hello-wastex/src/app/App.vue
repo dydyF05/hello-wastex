@@ -10,5 +10,7 @@ const onSearch = (search: string) => {
 
 <template>
   <Header v-bind:on-search="onSearch"></Header>
-  <Home></Home>
+  <div class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+    <Home></Home>
+  </div>
 </template>
