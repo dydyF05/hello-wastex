@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: npm
-        uses: ./.github/actions/install-node.yml
+        uses: ./.github/actions/install-node
 
       ### BUILD
       - name: Build
