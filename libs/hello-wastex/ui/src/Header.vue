@@ -40,7 +40,7 @@ const toggleSearchDisplay = (): void => {
 </script>
 
 <template>
-  <header class="bg-white shadow-md">
+  <header class="bg-white shadow-md fixed top-0 left-0 right-0 w-full">
     <nav
       class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       aria-label="Global"
@@ -62,7 +62,7 @@ const toggleSearchDisplay = (): void => {
     <div
       v-show="isSearchDisplayed"
       id="searchmodal"
-      class="fixed h-screen w-screen top-0 bottom-0 flex flex-1 justify-center flex-col p-8 z-50"
+      class="fixed h-screen w-screen top-0 bottom-0 flex flex-1 justify-center flex-col p-8"
       v-on:keyup.escape="toggleSearchDisplay"
       @click="toggleSearchDisplay"
     >
@@ -91,5 +91,6 @@ const toggleSearchDisplay = (): void => {
 #searchmodal {
   background-color: rgba(00, 0, 0, 0.8);
   animation: fadein 0.2s;
+  z-index: 99;
 }
 </style>

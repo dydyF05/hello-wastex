@@ -16,3 +16,8 @@ export type UIBreweryItem = {
   address: string;
   websiteUrl?: string;
 };
+/** The props BreweryCardComponent handles */
+export type UIBreweryComponentProps = {
+  item?: UIBreweryItem;
+  isLoading?: boolean;
+};

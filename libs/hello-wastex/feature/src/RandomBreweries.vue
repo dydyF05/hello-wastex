@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BreweryCards } from '@hello-wastex/ui';
+import { BreweryCards, UIBreweryComponentProps } from '@hello-wastex/ui';
 import { ApiBrewery, breweryApi, useFetch } from '@hello-wastex/utils';
 import { Ref, ref, watch } from 'vue';
 import { mapApiBreweryToUI } from './utils';
@@ -13,19 +13,22 @@ const { data, isFetching } = useFetch<ApiBrewery[]>({
 });
 
 const EMPTY: never[] = [];
-const items = ref<ReturnType<typeof mapApiBreweryToUI>[]>(EMPTY);
+const items = ref<UIBreweryComponentProps[]>(EMPTY);
 
 watch(
   data as Ref<ApiBrewery[]>,
   (apiItems) =>
     (items.value = Array.isArray(apiItems)
-      ? apiItems?.filter((i) => !!i).map(mapApiBreweryToUI) || EMPTY
+      ? apiItems
+          ?.filter((i) => !!i)
+          .map((item) => ({ item: mapApiBreweryToUI(item) })) || EMPTY
       : EMPTY)
 );
 </script>
 
 <template>
   <BreweryCards
+    title="Random"
     :items="items"
     :isLoading="isFetching"
     :placeholdersCount="COUNT"

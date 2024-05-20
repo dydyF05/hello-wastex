@@ -10,7 +10,15 @@ const onSearch = (search: string) => {
 
 <template>
   <Header v-bind:on-search="onSearch"></Header>
-  <div class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+  <div
+    class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 mt-20 relative"
+  >
     <Home></Home>
   </div>
 </template>
+
+<style scoped>
+div {
+  z-index: -1;
+}
+</style>

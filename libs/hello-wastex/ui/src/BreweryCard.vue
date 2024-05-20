@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { UIBreweryItem } from './types';
+import { UIBreweryComponentProps } from './types';
 
-const props = defineProps<{
-  item?: UIBreweryItem;
-  isLoading?: boolean;
-}>();
+const props = defineProps<UIBreweryComponentProps>();
 </script>
 
 <template>
