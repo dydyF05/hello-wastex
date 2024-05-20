@@ -1,0 +1,27 @@
+name: 'Install node and dependencies'
+description: 'Install node and dependencies'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Read Node version
+      run: echo NODE_VERSION=$(cat .node-version) >> "$GITHUB_OUTPUT"
+      shell: bash
+      id: node-version
+
+    - name: Install Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ steps.node-version.outputs.NODE_VERSION }}
+
+    - name: Cache Node
+      uses: actions/cache@v3
+      with:
+        path: '.npm/cache'
+        key: ${{ runner.os }}-npm-lock-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-cache-
+
+    - name: npm install
+      shell: bash
+      run: npm install
